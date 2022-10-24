@@ -201,15 +201,17 @@ if __name__ == "__main__":
                 choiceLength = driver.execute_script("return hack.stateNode.state.choices.length")
                 
                 stringStage = str(stage)
-                print("answer: " + answer)
                 print("stage: "+ stringStage)
+                print("\n")
  
                 if (choiceLength == 0) == True:
                     print("No Choices")
                     pass
                 
-            
+                #Question Stage
                 if (stringStage == "question") == True:
+                    print("answer: " + answer)
+                    print("\n")
                     sleep(1)
                     answer0 = driver.find_element("xpath", '//*[@id="answer0"]/div/div/div/div').text
                     answer1 = driver.find_element("xpath", '//*[@id="answer1"]/div/div/div/div').text
@@ -251,16 +253,158 @@ if __name__ == "__main__":
                     
                 if (stringStage == "prize") == True:
                     driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')
-                    print('hack 2 Injected')
                     choiceType1 = driver.execute_script("return hack.stateNode.state.choices[0].type")
                     choiceType2 = driver.execute_script("return hack.stateNode.state.choices[1].type")
                     choiceType3 = driver.execute_script("return hack.stateNode.state.choices[2].type")
-                    print("choice 1: " + choiceType1)
-                    print("choice 2: " + choiceType2)
-                    print("choice 3: " + choiceType3)
+                    choiceValue1 = driver.execute_script("return hack.stateNode.state.choices[0].val")
+                    choiceValue2 = driver.execute_script("return hack.stateNode.state.choices[1].val")
+                    choiceValue3 = driver.execute_script("return hack.stateNode.state.choices[2].val")
+                    print("choice 1: " + choiceType1 + " " + str(choiceValue1))
+                    print("choice 2: " + choiceType2 + " " + str(choiceValue2))
+                    print("choice 3: " + choiceType3 + " " + str(choiceValue3))
+                    print("\n")
+                  
+                  
+                  
+                  
+            #Tests for if more than 1 choice is Gold or Multiply 
+             
+                #Gold
+                    if (choiceType1 == "gold") == True and (choiceType2 == "gold") == True:
+                        if int(choiceValue1) > int(choiceValue2):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue1) < int(choiceValue2):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
+                            continue
+                        
+                    if (choiceType1 == "gold") == True and (choiceType3 == "gold") == True:
+                        if int(choiceValue1) > int(choiceValue3):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue1) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
                     
+                    if (choiceType2 == "gold") == True and (choiceType3 == "gold") == True:
+                        if int(choiceValue2) > int(choiceValue3):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue2) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
+                    if (choiceType1 == "gold") == True and (choiceType2 == "gold") == True and (choiceType3 == "gold") == True:
+                        if int(choiceValue1) > int(choiceValue2) and int(choiceValue1) > int(choiceValue3):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue2) and int(choiceValue2) > int(choiceValue3):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue3) and int(choiceValue2) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
                         
                         
+                #Multiply 
+                    if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == True:
+                        if int(choiceValue1) > int(choiceValue2):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue1) < int(choiceValue2):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
+                    if (choiceType1 == "multiply") == True and (choiceType3 == "multiply") == True:
+                        if int(choiceValue1) > int(choiceValue3):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue1) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
+                    if (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == True:
+                        if int(choiceValue2) > int(choiceValue3):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        elif int(choiceValue2) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
+                    if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == True:
+                        if int(choiceValue1) > int(choiceValue2) and int(choiceValue1) > int(choiceValue3):
+                            print("choice 1 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue2) and int(choiceValue2) > int(choiceValue3):
+                            print("choice 2 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue3) and int(choiceValue2) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
+                    
+                    
+            #Tests if only 1 choice is Gold or Multiply
+            
+                #Choice 1
                     if (choiceType1 == "divide") == True:
                         pass
                     if (choiceType1 == "take") == True:
@@ -283,6 +427,7 @@ if __name__ == "__main__":
                         pass
                         
                     
+                #Choice 2
                     if (choiceType2 == "divide") == True:
                         pass
                     if (choiceType2 == "take") == True:
@@ -304,7 +449,7 @@ if __name__ == "__main__":
                     else:
                         pass
                         
-                    
+                #Choice 3
                     if (choiceType3 == "divide") == True:
                         pass
                     if (choiceType3 == "take") == True:
@@ -327,6 +472,7 @@ if __name__ == "__main__":
                         pass    
                 pass
                 
+                #Feedback Stage
                 if (stringStage == "feedback") == True:
                     driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')
                     driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()

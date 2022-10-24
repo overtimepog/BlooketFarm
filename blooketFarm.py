@@ -36,6 +36,7 @@ if __name__ == "__main__":
     print(Blooket_Username)
     print(Blooket_Password)
     print(Blooket)
+    i = 1
 
     def check_exists_by_xpath(xpath):
         try:
@@ -70,13 +71,16 @@ if __name__ == "__main__":
             login = driver.find_element("xpath", '//*[@id="app"]/div/div/div[2]/form/input')
             login.click()
             sleep(2)
+            
+            print("logged in")
 
             #create Lobby
             driver.get(Blooket)
-            sleep(4)
-            i = 1
+            sleep(1)
             while i < 2:
+                print("testing")
                 if check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[1]') == True:
+                    print("found")
                     #select Gold
                     sleep(2)
                     driver.find_element('xpath', '//*[@id="app"]/div/div/div[3]/div[2]/div/div[1]/img').click()
@@ -121,17 +125,18 @@ if __name__ == "__main__":
                             continue
                     break
                 elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[1]') == False:
+                    print("not found")
                     continue
                 
             print('Lobby Online :)')
             print('\n')
-            sleep(2)
 
         #join Lobby
                 
             #create Farmer
             driver.execute_script("window.open('');")
-            sleep(2)
+            sleep(5)
+            driver.execute_script("window.open('');")
             driver.switch_to.window(driver.window_handles[1])
             driver.get("https://play.blooket.com/play")
             #print("Opened Bot " + str(bot) + "'s page")
@@ -194,15 +199,14 @@ if __name__ == "__main__":
                 stage = driver.execute_script("return hack.stateNode.state.stage")
                 answer = driver.execute_script("return hack.stateNode.state.question.correctAnswers.toString()")
                 choiceLength = driver.execute_script("return hack.stateNode.state.choices.length")
-                choiceType1 = driver.execute_script("retrun hack.stateNode.state.choices[0].type")
-                choiceType2 = driver.execute_script("retrun hack.stateNode.state.choices[1].type")
-                choiceType3 = driver.execute_script("retrun hack.stateNode.state.choices[2].type")
+                
                 stringStage = str(stage)
                 print("answer: " + answer)
                 print("stage: "+ stringStage)
-                print("choice 1: " + choiceType1)
-                print("choice 2: " + choiceType2)
-                print("choice 3: " + choiceType3)
+ 
+                if (choiceLength == 0) == True:
+                    print("No Choices")
+                    pass
                 
             
                 if (stringStage == "question") == True:
@@ -241,8 +245,21 @@ if __name__ == "__main__":
                         pass
     
                 sleep(2)
+                
+                
+
                     
                 if (stringStage == "prize") == True:
+                    driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')
+                    print('hack 2 Injected')
+                    choiceType1 = driver.execute_script("return hack.stateNode.state.choices[0].type")
+                    choiceType2 = driver.execute_script("return hack.stateNode.state.choices[1].type")
+                    choiceType3 = driver.execute_script("return hack.stateNode.state.choices[2].type")
+                    print("choice 1: " + choiceType1)
+                    print("choice 2: " + choiceType2)
+                    print("choice 3: " + choiceType3)
+                    
+                        
                         
                     if (choiceType1 == "divide") == True:
                         pass
@@ -251,15 +268,17 @@ if __name__ == "__main__":
                     if (choiceType1 == "swap") == True:
                         pass                       
                     if (choiceType1 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice1___1aP2D-camelCase').click()
-                        sleep(2)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                        driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                        sleep(1)
+                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                        continue
                     else:
                         pass                          
                     if (choiceType1 == "gold") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice1___1aP2D-camelCase').click()
-                        sleep(2)
+                        driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                        sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                        continue
                     else:
                         pass
                         
@@ -271,15 +290,17 @@ if __name__ == "__main__":
                     if (choiceType2 == "swap") == True:
                         pass                       
                     if (choiceType2 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice2___1aP2D-camelCase').click()
-                        sleep(2)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()                           
+                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                        sleep(1)
+                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
+                        continue                        
                     else:
                         pass
                     if (choiceType2 == "gold") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice2___1aP2D-camelCase').click()
-                        sleep(2)
+                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                        sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                        continue
                     else:
                         pass
                         
@@ -291,25 +312,20 @@ if __name__ == "__main__":
                     if (choiceType3 == "swap") == True:
                         pass                       
                     if (choiceType3 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice3___1aP2D-camelCase').click()
-                        sleep(2)
+                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                        sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                        continue
                     else:
                         pass
                     if (choiceType3 == "gold") == True:
-                        driver.find_element(By.CSS_SELECTOR  , '#claimButton > div > div.styles__choice3___1aP2D-camelCase').click()
-                        sleep(2)
+                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                        sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                        continue
                     else:
-                        pass
-                        
-                    
-                    
-                        
-                        
+                        pass    
                 pass
-                
-                sleep(2)
                 
                 if (stringStage == "feedback") == True:
                     driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')

@@ -5,6 +5,7 @@ import os
 import sys
 import time
 import random
+import threading
 from time import sleep
 from itertools import groupby
 from selenium import webdriver
@@ -106,7 +107,14 @@ if __name__ == "__main__":
                     
                     #print("Time Set to " + BlooketTime + " minutes")
                     #sleep(2)
-                    
+                    driver.find_element('xpath', '//*[@id="app"]/div/div/div[3]/div[2]/div[3]/div[3]/img').click()
+                    sleep(2)
+                    print("Turned on Gold")
+                    driver.find_element('xpath', '#app > div > div > div.styles__center___qMDUw-camelCase.styles__bigScreen___1OqJ1-camelCase > div.styles__mainContainer___1doVE-camelCase > div.styles__amountContainer___3IhWu-camelCase > input').click()
+                    GoldInput = driver.find_element('xpath', '#app > div > div > div.styles__center___qMDUw-camelCase.styles__bigScreen___1OqJ1-camelCase > div.styles__mainContainer___1doVE-camelCase > div.styles__amountContainer___3IhWu-camelCase > input')
+                    GoldInput.send_keys(1000000000000)
+                    sleep(2)
+                    print("Set Gold to 1000000000000")
                     while i < 2:
                         if check_exists_by_css("#hostNow") == True:
                             driver.find_element(By.CSS_SELECTOR, '#hostNow').click()
@@ -495,7 +503,20 @@ if __name__ == "__main__":
                     driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')
                     driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
                     continue
-                    
-  
+            
+            def endGame():
+                
+                
+                
+                coins = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(1) > div").text
+                xp = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(2) > div.styles__counterText___2hnWg-camelCase").text
+                
+                print("Coins: " + coins)
+                print("XP: " + xp)
+                
+                driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__button___22rMT-camelCase.styles__hoverBlue___2zYb_-camelCase").click()
+                print("Game Over")
+            
+            
             
     except Exception as e: print(e)   

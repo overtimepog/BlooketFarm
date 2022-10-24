@@ -76,7 +76,7 @@ if __name__ == "__main__":
             sleep(4)
             i = 1
             while i < 2:
-                if check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[2]/div/div[1]/img') == True:
+                if check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[1]') == True:
                     #select Gold
                     sleep(2)
                     driver.find_element('xpath', '//*[@id="app"]/div/div/div[3]/div[2]/div/div[1]/img').click()
@@ -120,7 +120,7 @@ if __name__ == "__main__":
                         elif check_exists_by_xpath('//*[@id="idNum"]') == False:
                             continue
                     break
-                elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[2]/div/div[11]/img') == False:
+                elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div[1]') == False:
                     continue
                 
             print('Lobby Online :)')

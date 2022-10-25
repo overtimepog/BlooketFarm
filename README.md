@@ -32,7 +32,8 @@ it should look like this:
 ```
   username=
   password=
-  blooket=
+  time=
+  blooket=https://play.blooket.com/host?id=600b1491d42a140004d5215a
 ```
 
 #### .env values
@@ -42,6 +43,7 @@ Blooket Account **can not** be google login only, must be regular acccount.
 | :-------- | :------------------------- |
 | `username` | **Required**. Your Blooket Account Username |
 | `password` | **Required**. Your Blooket Account Password |
+| `time` | time you want the bot to farm for in seconds |
 | `blooket` | Blooket to Farm (Can be left alone) |
 
 
@@ -50,6 +52,7 @@ it should look like this:
 ```
   username=BlooketUsername
   password=BlooketPassword
+  time=300
   blooket=https://play.blooket.com/host?id=600b1491d42a140004d5215a
 ```
 

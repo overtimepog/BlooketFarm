@@ -1,6 +1,4 @@
 from __future__ import print_function
-from calendar import c
-from operator import truediv
 import re
 import os
 import sys
@@ -580,49 +578,36 @@ if __name__ == "__main__":
                     print("choice 2: " + choiceType2 + " " + str(choiceValue2))
                     print("choice 3: " + choiceType3 + " " + str(choiceValue3))
                     
-                    
-            #ANCHOR - if no option is Gold, Multiply or Nothing, Pick Divide
-                    if (choiceType1 == "divide") == True and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
-                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                            continue
-                        
-                    if (choiceType2 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
-                            continue
-                        
-                    if (choiceType3 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False:
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
-                            continue
-                  
-            #ANCHOR - Make it Pick Multiply at all times
-                    if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == False and (choiceType3 == "multiply") == False:
-                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                            continue
-                        
-                    if (choiceType1 == "multiply") == False and (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == False:
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
-                            continue
-                        
-                    if (choiceType1 == "multiply") == False and (choiceType2 == "multiply") == False and (choiceType3 == "multiply") == True:
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
-                            continue
                   
                   
             #ANCHOR - Tests for if more than 1 choice is Gold or Multiply 
              
                 #Gold
+                    if (choiceType1 == "gold") == True and (choiceType2 == "gold") == True and (choiceType3 == "gold") == True:
+                        if int(choiceValue1) > int(choiceValue2) and int(choiceValue1) > int(choiceValue3):
+                            print("choice 1 is greater")
+                            print("\n")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue2) and int(choiceValue2) > int(choiceValue3):
+                            print("choice 2 is greater")
+                            print("\n")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        
+                        elif int(choiceValue1) < int(choiceValue3) and int(choiceValue2) < int(choiceValue3):
+                            print("choice 3 is greater")
+                            print("\n")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                    
                     if (choiceType1 == "gold") == True and (choiceType2 == "gold") == True:
                         if int(choiceValue1) > int(choiceValue2):
                             print("choice 1 is greater")
@@ -671,7 +656,10 @@ if __name__ == "__main__":
                             driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
                             continue
                     
-                    if (choiceType1 == "gold") == True and (choiceType2 == "gold") == True and (choiceType3 == "gold") == True:
+                        
+                        
+                #Multiply 
+                    if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == True:
                         if int(choiceValue1) > int(choiceValue2) and int(choiceValue1) > int(choiceValue3):
                             print("choice 1 is greater")
                             print("\n")
@@ -695,9 +683,7 @@ if __name__ == "__main__":
                             sleep(1)
                             driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
                             continue
-                        
-                        
-                #Multiply 
+                  
                     if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == True:
                         if int(choiceValue1) > int(choiceValue2):
                             print("choice 1 is greater")
@@ -746,30 +732,7 @@ if __name__ == "__main__":
                             driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
                             continue
                     
-                    if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == True:
-                        if int(choiceValue1) > int(choiceValue2) and int(choiceValue1) > int(choiceValue3):
-                            print("choice 1 is greater")
-                            print("\n")
-                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                            continue
-                        
-                        elif int(choiceValue1) < int(choiceValue2) and int(choiceValue2) > int(choiceValue3):
-                            print("choice 2 is greater")
-                            print("\n")
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                            continue
-                        
-                        elif int(choiceValue1) < int(choiceValue3) and int(choiceValue2) < int(choiceValue3):
-                            print("choice 3 is greater")
-                            print("\n")
-                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
-                            sleep(1)
-                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                            continue
+  
                     
                     
                     
@@ -777,19 +740,31 @@ if __name__ == "__main__":
             
                 #Choice 1
                     if (choiceType1 == "divide") == True:
-                        pass
+                        if (choiceType1 == "divide") == True and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
+                            print("choice 1 is divide and all thats left") 
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        else:
+                            pass
                     if (choiceType1 == "take") == True:
                         pass  
                     if (choiceType1 == "swap") == True:
                         pass                       
                     if (choiceType1 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#chest1").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                        continue
+                        if (choiceType1 == "multiply") == True and (choiceType2 == "multiply") == False and (choiceType3 == "multiply") == False:
+                            print("choice 1 is multiply")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
                     else:
-                        pass                          
-                    if (choiceType1 == "gold") == True:
+                        pass        
+                    
+                #FIXME - if choice 1 is gold and the others are multiply, it will choose choice 1 instead of 2 or 3                  
+                    if (choiceType1 == "gold") == True: 
+                        print("choice 1 is gold")
                         driver.find_element(By.CSS_SELECTOR, "#chest1").click()
                         sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
@@ -798,29 +773,47 @@ if __name__ == "__main__":
                         pass
                     
                     if (choiceType1 == "nothing") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#chest1").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
-                        continue
+                        if (choiceType1 == "nothing") == True and (choiceType2 == "swap") == True or (choiceType2 == "take") == True or (choiceType2 == "divide") == True and (choiceType3 == "swap") == True or (choiceType3 == "take") == True or (choiceType3 == "divide") == True:
+                            print("choice 1 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
+                            continue
+                        else:
+                            print("choice 1 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#chest1").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
                     else:
                         pass
                         
                     
                 #Choice 2
                     if (choiceType2 == "divide") == True:
-                        pass
+                        if (choiceType2 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
+                            print("choice 2 is divide and all thats left")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
+                            continue
+                        else:
+                            pass
                     if (choiceType2 == "take") == True:
                         pass  
                     if (choiceType2 == "swap") == True:
                         pass                       
                     if (choiceType2 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
-                        continue                        
+                        if (choiceType1 == "multiply") == False and (choiceType2 == "multiply") == True and (choiceType3 == "multiply") == False:
+                            print("choice 2 is multiply")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()   
+                            continue                       
                     else:
                         pass
                     if (choiceType2 == "gold") == True:
+                        print("choice 2 is gold")
                         driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
                         sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
@@ -829,28 +822,47 @@ if __name__ == "__main__":
                         pass
                     
                     if (choiceType2 == "nothing") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
-                        continue
+                        if (choiceType2 == "nothing") == True and (choiceType1 == "take") == True or (choiceType1 == "swap") == True or (choiceType1 == "divide") == True and (choiceType3 == "take") == True or (choiceType3 == "swap") == True or (choiceType3 == "divide") == True:
+                            print("choice 2 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
+                            
+                        else:
+                            print("choice 2 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
                     else:
                         pass
                         
                 #Choice 3
-                    if (choiceType3 == "divide") == True:
-                        pass
+                    if (choiceType3 == "divide") == True:                          
+                        if (choiceType3 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False:
+                            print("choice 3 is divide and all thats left")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
+                        else: 
+                            pass
                     if (choiceType3 == "take") == True:
                         pass  
                     if (choiceType3 == "swap") == True:
                         pass                       
                     if (choiceType3 == "multiply") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click()
-                        continue
+                        if (choiceType1 == "multiply") == False and (choiceType2 == "multiply") == False and (choiceType3 == "multiply") == True:
+                            print("choice 3 is multiply")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
                     else:
                         pass
                     if (choiceType3 == "gold") == True:
+                        print("choice 3 is gold")
                         driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
                         sleep(1)
                         driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
@@ -858,10 +870,18 @@ if __name__ == "__main__":
                     else:
                         pass 
                     if (choiceType3 == "nothing") == True:
-                        driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
-                        sleep(1)
-                        driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
-                        continue
+                        if (choiceType3 == "nothing") == True and (choiceType1 == 'take') == True or (choiceType1 == 'swap') == True or (choiceType1 == "divide") == True and (choiceType2 == 'take') == True or (choiceType2 == 'swap') == True or (choiceType2 == "divide") == True:
+                            print("choice 3 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
+                        else:
+                            print("choice 3 is nothing")
+                            driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
+                            sleep(1)
+                            driver.find_element(By.CSS_SELECTOR, "#app > div > div").click() 
+                            continue
                     else:
                         pass
                 pass

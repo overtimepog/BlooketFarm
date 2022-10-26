@@ -55,16 +55,35 @@ if __name__ == "__main__":
             return False
         return True
     
+    #SECTION - End Game Function
     def endGame():
-        
         #switch tabs, and hit end button
                 driver.execute_script('hack = Object.values(document.querySelector("#app > div > div"))[1].children[0]._owner;')
                 stage = driver.execute_script("return hack.stateNode.state.stage")
-                answer = driver.execute_script("return hack.stateNode.state.question.correctAnswers.toString()")
                 
-                stringStage = str(stage)
-                print("stage: "+ stringStage)
+                sleep(2)
+                driver.switch_to.window(driver.window_handles[0])
+                print("Switched to Host Tab")
+                sleep(1)
+                
+                driver.find_element("xpath", '//*[@id="app"]/div/div/div[1]/div[3]/i').click()
+                print("Clicked End Game")
+                
+                driver.switch_to.window(driver.window_handles[1])
                 print("\n")
+                sleep(4)
+                #xp multiplier button
+                while i < 2:
+                    if check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div/div[2]/div[3]/div[1]') == True:
+                        sleep(1)
+                        driver.find_element("xpath", '//*[@id="app"]/div/div/div[3]/div/div[2]/div[3]/div[1]').click()
+                        print("Clicked XP Multiplier")
+                        sleep(1)
+                        break
+                    elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div/div[2]/div[2]/div[1]') == False:
+                        continue
+                
+                #Thanks Button --- //*[@id="app"]/div/div/div[3]/div/div[2]/div[2]
                 sleep(10)
                 coins = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(1) > div").text
                 xp = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(2) > div.styles__counterText___2hnWg-camelCase").text
@@ -76,7 +95,8 @@ if __name__ == "__main__":
                 
                 driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__button___22rMT-camelCase.styles__hoverBlue___2zYb_-camelCase").click()
                 print("Game Over")
-    driver = uc.Chrome(version_main=106)
+    #!SECTION - End Game Function
+    driver = uc.Chrome()
     try:
             driver.get("https://id.blooket.com/login")
             sleep(2)
@@ -478,7 +498,7 @@ if __name__ == "__main__":
             
                 #Choice 1
                     if (choiceType1 == "divide") == True:
-                        if (choiceType1 == "divide") == True and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
+                        if choiceType1 == "divide" and choiceType2 != "gold" or choiceType2 != "multiply"  or choiceType2 != "nothing" and choiceType3 != "gold" or choiceType3 != "multiply" or choiceType3 != "nothing":
                             print("choice 1 is divide and all thats left") 
                             driver.find_element(By.CSS_SELECTOR, "#chest1").click()
                             sleep(1)
@@ -486,6 +506,8 @@ if __name__ == "__main__":
                             continue
                         else:
                             pass
+                    else:
+                        pass
                     if (choiceType1 == "take") == True:
                         pass  
                     if (choiceType1 == "swap") == True:
@@ -547,7 +569,7 @@ if __name__ == "__main__":
                     
                 #Choice 2
                     if (choiceType2 == "divide") == True:
-                        if (choiceType2 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType3 == "gold") == False or (choiceType3 == "multiply") == False or (choiceType3 == "nothing") == False:
+                        if choiceType2 == "divide" and choiceType1 != "gold" or choiceType1 != "multiply"  or choiceType1 != "nothing" and choiceType3 != "gold" or choiceType3 != "multiply" or choiceType3 != "nothing":
                             print("choice 2 is divide and all thats left")
                             driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice2___1aP2D-camelCase").click()
                             sleep(1)
@@ -555,6 +577,8 @@ if __name__ == "__main__":
                             continue
                         else:
                             pass
+                    else:
+                        pass
                     if (choiceType2 == "take") == True:
                         pass  
                     if (choiceType2 == "swap") == True:
@@ -612,7 +636,7 @@ if __name__ == "__main__":
                         
                 #Choice 3
                     if (choiceType3 == "divide") == True:                          
-                        if (choiceType3 == "divide") == True and (choiceType1 == "gold") == False or (choiceType1 == "multiply") == False or (choiceType1 == "nothing") == False and (choiceType2 == "gold") == False or (choiceType2 == "multiply") == False or (choiceType2 == "nothing") == False:
+                        if choiceType3 == "divide" and choiceType1 != "gold" or choiceType1 != "multiply"  or choiceType1 != "nothing" and choiceType2 != "gold" or choiceType2 != "multiply" or choiceType2 != "nothing":
                             print("choice 3 is divide and all thats left")
                             driver.find_element(By.CSS_SELECTOR, "#claimButton > div > div.styles__choice3___2L6Q--camelCase").click()
                             sleep(1)

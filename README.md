@@ -63,6 +63,6 @@ it should look like this:
 To run the Farm run the command:
 
 ```python
-  python3 Farm.py
+  python3 blooketFarm.py
 ```
 

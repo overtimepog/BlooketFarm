@@ -21,8 +21,8 @@ No, The Values in the .env file are only visable to you :)
 git clone the Farm and install the requirements
 
 ```python
-  git clone theproject.git
-  cd my-project
+  git clone https://github.com/overtimepog/BlooketFarm.git
+  cd BlooketFarm
   pip3 install -r requirements.txt
 ```
 please also change the name of the ```.env.example``` file

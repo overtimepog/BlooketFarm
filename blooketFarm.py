@@ -83,15 +83,18 @@ if __name__ == "__main__":
                     elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div/div[2]/div[2]/div[1]') == False:
                         continue
                 
-                #Thanks Button --- //*[@id="app"]/div/div/div[3]/div/div[2]/div[2]
-                sleep(10)
-                coins = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(1) > div").text
-                xp = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(2) > div.styles__counterText___2hnWg-camelCase").text
-                
-                print("Coins: " + coins)
-                print("XP: " + xp)
-                
-                sleep(10)
+                while i <2:
+                    if check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div/div[2]/div[2]') == True:
+                        sleep(10)
+                        coins = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(1) > div").text
+                        xp = driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__counterRow___1fheR-camelCase > div:nth-child(2) > div.styles__counterText___2hnWg-camelCase").text
+                        print("\n")
+                        print("Coins: " + coins)
+                        print("XP: " + xp)
+                        print("\n")
+                        break
+                    elif check_exists_by_xpath('//*[@id="app"]/div/div/div[3]/div/div[2]/div[2]') == False:
+                        continue
                 
                 driver.find_element(By.CSS_SELECTOR, "#app > div > div > div.arts__modal___VpEAD-camelCase > div > div.styles__addTokenContainer___1Th4A-camelCase > div.styles__button___22rMT-camelCase.styles__hoverBlue___2zYb_-camelCase").click()
                 print("Game Over")
@@ -706,5 +709,5 @@ if __name__ == "__main__":
             
         #!SECTION Play Game
             
-    except Exception as e: 
+    except Exception as e:
         print(e)
